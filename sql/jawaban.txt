@@ -1,0 +1,70 @@
+SQL
+
+Soal 1.
+CREATE SCHEMA `myshop` ;
+
+
+Soal 2.
+
+CREATE TABLE `myshop`.`users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL,
+  `email` VARCHAR(255) NULL,
+  `password` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`));
+
+ALTER TABLE `myshop`.`items` 
+DROP FOREIGN KEY `category_id`;
+ALTER TABLE `myshop`.`items` 
+ADD INDEX `category_id_idx` (`category_id` ASC) VISIBLE,
+DROP INDEX `category_id_idx` ;
+;
+ALTER TABLE `myshop`.`items` 
+ADD CONSTRAINT `category_id`
+  FOREIGN KEY (`category_id`)
+  REFERENCES `myshop`.`categories` (`id`)
+  ON DELETE RESTRICT
+  ON UPDATE RESTRICT;
+
+
+CREATE TABLE `myshop`.`categories` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`));
+
+Soal 3.
+to User
+INSERT INTO `myshop`.`users` (`id`, `name`, `email`, `password`) VALUES ('1', 'John Doe', 'john@doe.com', 'john123');
+INSERT INTO `myshop`.`users` (`id`, `name`, `email`, `password`) VALUES ('2', 'Jane Doe', 'jane@doe.com', 'jenita123');
+
+categories
+INSERT INTO `myshop`.`categories` (`name`) VALUES ('name');
+INSERT INTO `myshop`.`categories` (`name`) VALUES ('gadget');
+INSERT INTO `myshop`.`categories` (`name`) VALUES ('cloth');.
+INSERT INTO `myshop`.`categories` (`name`) VALUES ('men');
+INSERT INTO `myshop`.`categories` (`name`) VALUES ('women');
+INSERT INTO `myshop`.`categories` (`name`) VALUES ('branded');
+
+items
+INSERT INTO `myshop`.`items` (`id`, `name`, `description`, `price`, `stock`, `category_id`) VALUES ('1', 'Sumsang', 'hape keren dari merek sumsang', '4000000', '100', '1');
+INSERT INTO `myshop`.`items` (`id`, `name`, `description`, `price`, `stock`, `category_id`) VALUES ('2', 'Uniklooh', 'baju keren dari brand ternama', '500000', '50', '2');
+INSERT INTO `myshop`.`items` (`id`, `name`, `description`, `price`, `stock`, `category_id`) VALUES ('3', 'IMHO Watch', 'am tangan anak yang jujur banget', '2000000', '10', '1');
+
+
+soal 4 
+
+a.SELECT name,email FROM myshop.users;
+b.-SELECT  *  FROM myshop.items where price > 1000000;
+  -SELECT * FROM myshop.items WHERE name LIKE '%watch%';
+
+
+
+
+c. SELECT * FROM items INNER JOIN categories ON items.category_id=categories.id 
+
+Soal No.5
+
+UPDATE items SET price='2500000' WHERE id='1';
+
+
+
